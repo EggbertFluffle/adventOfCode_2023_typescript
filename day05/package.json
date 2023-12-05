@@ -1,0 +1,14 @@
+{
+  "name": "day03",
+  "module": "main.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "cli-progress": "^3.12.0"
+  }
+}
