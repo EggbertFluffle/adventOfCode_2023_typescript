@@ -18,18 +18,15 @@ async function main() {
 	const statusMarker = 1000000;
 
 	let closestLocation: number = Number.MAX_VALUE;
-	for(let p = 0; p < seeds.length / 2; p += 2) {
-		let timeStart = Date.now();
+	for(let p = 0; p < seeds.length; p += 2) {
 		let bar = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
 		bar.start(seeds[p + 1], 0);
 		for(let s = seeds[p]; s < seeds[p] + seeds[p + 1]; s++) {
-			let location = followSeed(s, parsedInput);
-			closestLocation = Math.min(closestLocation, location);
+			closestLocation = Math.min(closestLocation, followSeed(s, parsedInput));
 			if(s % statusMarker == 0) {
 				console.clear();
-				console.log((p + 1) + "/10");
+				console.log((p + 1) + "/" + (seeds.length / 2));
 				bar.update(s - seeds[p]);
-				timeStart = Date.now();
 			}
 		}
 		bar.stop();
