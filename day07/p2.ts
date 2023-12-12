@@ -42,7 +42,6 @@ class Hand {
 		this.bid = parseInt(str.slice(6));
 		this.cards = new Map<string, number>();
 
-		this.GetMapOfHand();
 		if(this.hand == "JJJJJ") {
 			this.hand = "AAAAAA";
 		} else if(this.hand.split("").filter(n => n == "J").length == 4) {
@@ -51,6 +50,7 @@ class Hand {
 		} else {
 			this.TestForJokers();
 		}
+		this.GetMapOfHand();
 
 		// Identify type and give ranking based on that
 		this.type = Hand.GetHandType(this.cards);
@@ -139,12 +139,7 @@ class Hand {
 	GetMapOfHand(): void {
 		this.cards = new Map<string, number>();
 		for(let i = 0; i < this.hand.length; i++) {
-			// Set spot in map if it doesnt exist
-			if(!this.cards.has(this.hand[i])) {
-				this.cards.set(this.hand[i], 1);
-			} else {
-				this.cards.set(this.hand[i], this.cards.get(this.hand[i]) + 1);
-			}
+			this.cards.set(this.hand[i], !this.cards.has(this.hand[i]) ? 1 : this.cards.get(this.hand[i]) + 1);
 		}
 	}
 }
